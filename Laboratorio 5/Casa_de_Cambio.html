@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Casa de Cambio</title>
+  <link href="estilos.css" rel="stylesheet"/>
+</head>
+<body>
+  <h1>Casa de Cambio</h1>
+  <form id="casaDeCambioForm">
+    <label for="monedaOrigen">Moneda de origen:</label>
+    <select id="monedaOrigen" name="monedaOrigen">
+      <option value="dolar">Dólar</option>
+      <option value="soles">Soles</option>
+      <option value="euro">Euro</option>
+    </select>
+
+    <label for="monedaDestino">Moneda de destino:</label>
+    <select id="monedaDestino" name="monedaDestino">
+      <option value="dolar">Dólar</option>
+      <option value="soles">Soles</option>
+      <option value="euro">Euro</option>
+    </select>
+
+    <label for="monto">Ingrese el monto:</label>
+    <input type="number" id="monto" name="monto" step="0.01" required>
+
+    <button type="button" onclick="calcularTotal()">Cotizar</button>
+  </form>
+
+  <script>
+    function calcularTotal() {
+      
+      const monedaOrigen = document.getElementById("monedaOrigen").value;
+      const monedaDestino = document.getElementById("monedaDestino").value;
+      const monto = parseFloat(document.getElementById("monto").value);
+
+      // Realizar cálculos de cambio de moneda
+      let tasaCambio;
+      if (monedaOrigen === "dolar" && monedaDestino === "soles") {
+        tasaCambio = 3.8; // Tasa de cambio de Dólar a Soles
+      } else if (monedaOrigen === "dolar" && monedaDestino === "euro") {
+        tasaCambio = 0.91; // Tasa de cambio de Dólar a Euro
+      } else if (monedaOrigen === "soles" && monedaDestino === "dolar") {
+        tasaCambio = 0.26; // Tasa de cambio de Soles a Dólar
+      } else if (monedaOrigen === "soles" && monedaDestino === "euro") {
+        tasaCambio = 0.24; // Tasa de cambio de Soles a Euro
+      } else if (monedaOrigen === "euro" && monedaDestino === "dolar") {
+        tasaCambio = 1.10; // Tasa de cambio de Euro a Dólar
+      } else if (monedaOrigen === "euro" && monedaDestino === "soles") {
+        tasaCambio = 4.13; // Tasa de cambio de Euro a Soles
+      } else {
+        alert("Error: Selecciona monedas válidas");
+        return;
+      }
+
+      const total = monto * tasaCambio;
+      alert(`Total a recibir: ${total} ${monedaDestino}`);
+    }
+  </script>
+</body>
+</html>
+
